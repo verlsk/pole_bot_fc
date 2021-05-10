@@ -27,10 +27,7 @@ while 1:
     driver.get('https://www.forocoches.com/foro/showthread.php?t=' + str(start_num))
     try:
         # Extraer el titulo del post
-        try:
-            title = driver.find_element_by_class_name("cmega").text
-        except:
-            print("problema titulo")
+        title = driver.find_element_by_class_name("cmega").text
         # Comprobar si el tema es serio o no
         if "serio" in title or "Serio" in title or "+serio" in title or "+Serio" in title:
             # Tema serio. No se polea
