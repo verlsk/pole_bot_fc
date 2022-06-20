@@ -9,16 +9,19 @@ driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).ins
 
 # Pagina de login
 driver.get('https://www.forocoches.com/foro/misc.php?do=page&template=ident')
-time.sleep(1)
+# time.sleep(1)
 # Aceptar cookies
-driver.find_element_by_link_text("Accept all").click()
-time.sleep(2)
+# driver.find_element_by_link_text("Accept all").click()
+# time.sleep(2)
 # Usuario y pass
-driver.find_elements_by_name("vb_login_username")[1].send_keys(sys.argv[1])
-driver.find_elements_by_name("vb_login_password")[1].send_keys(sys.argv[2])
-time.sleep(2)
-# Aceptar usuario y pass
-driver.find_element_by_name("logb2").click()
+element = driver.find_element(By.ID, "navbar_username")
+element.send_keys(sys.argv[1])
+element = driver.find_element(By.ID, "navbar_password")
+element.send_keys(sys.argv[2])
+element.send_keys(Keys.RETURN)
+timeout = 1000
+element_present = EC.presence_of_element_located((By.LINK_TEXT, sys.argv[1]))
+WebDriverWait(driver, timeout).until(element_present)
 
 start_num = int(sys.argv[3])
 
